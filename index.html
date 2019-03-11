@@ -1,124 +1,190 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="cz" dir="ltr">
-<head>
-  <title>CB Třinec Dolní Lištná</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css">
+  <head>
+    <title>CB Třinec Dolní Lištná</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css"
+    />
+  </head>
+  <body class="bg-yellow-dark font-sans leading-normal tracking-normal">
+    <header>
+      <nav class="bg-yellow-darkest p-2 mt-0 w-full">
+        <!-- Add this to make the nav fixed: "fixed z-10 pin-t" -->
+        <div class="container mx-auto flex flex-wrap items-center">
+          <div
+            class="flex w-full md:w-1/2 justify-center md:justify-start text-white font-extrabold"
+          >
+            <a
+              class="text-white no-underline"
+              href="#"
+            >
+              <span class="text-2xl pl-2">CB Třinec Dolní Lištná</span>
+            </a>
+          </div>
+          <div
+            class="flex w-full pt-2 content-center justify-between md:w-1/2 md:justify-end"
+          >
+            <ul
+              class="md:flex list-reset text-center md:flex-none justify-between flex-1"
+            >
+              <li class="mr-3">
+                <a
+                  class="inline-block py-2 px-4 text-white no-underline"
+                  href="#calendar"
+                  >Oznámení</a
+                >
+              </li>
+              <li class="mr-3 border-t md:border-0">
+                <a
+                  class="inline-block py-2 px-4 text-white no-underline"
+                  href="#messages"
+                  >Kázání</a
+                >
+              </li>
+              <li class="mr-3 border-t md:border-0">
+                <a
+                  class="inline-block py-2 px-4 text-white no-underline"
+                  href="#contact"
+                  >Kontakt</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
 
-</head>
-<body class="bg-yellow-dark font-sans leading-normal tracking-normal">
-
-<header>
-  <nav class="bg-yellow-darkest p-2 mt-0 w-full"> <!-- Add this to make the nav fixed: "fixed z-10 pin-t" -->
-    <div class="container mx-auto flex flex-wrap items-center">
-      <div class="flex w-full md:w-1/2 justify-center md:justify-start text-white font-extrabold">
-        <a class="text-white no-underline hover:text-white hover:no-underline" href="#">
-          <span class="text-2xl pl-2">CB Třinec Dolní Lištná</span>
-        </a>
+    <div
+      class="container mx-auto flex flex-col md:flex-row items-center my-6 md:my-24"
+    >
+      <div
+        class="flex flex-col w-full lg:w-1/2 justify-center items-start pt-12 pb-24 px-6"
+      >
+        <p class="uppercase tracking-loose">Rádi tě uvidíme mezi námi</p>
+        <h1 class="mt-4">Církev bratrská</h1>
+        <h2 class="mb-4">Třinec Dolní Lištná</h2>
+        <p class="leading-normal mb-4">
+          Církev bratrská v Lištné je komunitou lidí, kteří chtějí svou víru žít
+          nejen v neděli. Naším kompasem je Bible a centrem našeho života je
+          Ježíš Kristus. Chceme se líbit Bohu, přebývat v Jeho přítomnosti, žít
+          podle Jeho vůle a především žít podle Jeho největšího přikázání –
+          milovat Boha a lidi kolem sebe.
+        </p>
+        <p class="leading-normal font-medium text-xl">
+          Scházme se každou neděli<br />
+          9:30–11:00<br />
+          Dolní Lištná 9
+        </p>
       </div>
-      <div class="flex w-full pt-2 content-center justify-between md:w-1/2 md:justify-end">
-        <ul class="md:flex list-reset text-center md:flex-none justify-between flex-1">
+
+      <div class="w-full lg:w-1/2 lg:py-6 text-center">
+        <img
+          class="fill-current w-3/5 rounded-full"
+          src="./img/hero.jpg"
+          alt="CB Třinec Lištná"
+        />
+      </div>
+    </div>
+
+    <div class="bg-white">
+      <div class="container mx-auto px-0 pt-16 sm:pt-0 md:px-12 lg:px-6">
+        <p
+          id="calendar"
+          class="font-bold text-grey-darkest text-4xl px-3 section-heading"
+        >
+          Oznámení <small id="today-date" ></small>
+        </p>
+
+        <section class="content-section-a">
+          <div class="container">
+            <div id="regularEvents"></div>
+            <div id="irregularEvents"></div>
+            <div id="otherEvents"></div>
+          </div>
+        </section>
+
+        <section class="content-section-a">
+          <div class="container">
+            <hr class="section-heading-spacer" />
+            <div class="clearfix"></div>
+            <p id="messages" class="font-bold text-grey-darkest text-4xl px-3 section-heading">
+              Kázání
+            </p>
+            <div id="messages-list"></div>
+            <p class="ml-3 font-bold text-lg"><a href="archive.html">Archív kazání</a></p>
+          </div>
+        </section>
+
+        <div id="contact" class="container mx-auto md:pt-16">
+          <p class="font-bold text-grey-darkest text-4xl px-3 mb-6">
+            Kontakt
+          </p>
+          <p class="px-3 pb-4">
+            Sbor Církve bratrské Třinec, Dolní Lištná<br />
+            Dolní Lištná č.p. 9<br />
+            739 61 Třinec
+          </p>
+
+          <p class="px-3 pb-4">
+            IČO 265 20 354<br />
+            č.ú. 3207092399/0800 Česká spořitelna
+          </p>
+
+          <p class="px-3 pb-12">
+            Kazatel a správce sboru: Jakub Vrtaňa<br />
+            jakub.vrtana@cb.cz<br />
+            +420 776 019 926
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="container mx-auto py-5 px-6">
+      <div class="flex w-full pt-2 content-center justify-center">
+        <ul
+          class="list-reset flex justify-between flex-1 md:flex-none items-center"
+        >
           <li class="mr-3">
-            <a class="inline-block py-2 px-4 text-white no-underline" href="#calendar">Oznámení</a>
+            <a
+              class="inline-block py-2 px-3 text-grey-darkest no-underline"
+              href="#"
+              >Domů</a
+            >
           </li>
-          <li class="mr-3 border-t md:border-0">
-            <a class="inline-block py-2 px-4 text-white no-underline" href="#messages">Kázání</a>
+          <li class="mr-3">
+            <a
+              class="inline-block py-2 px-3 text-grey-darkest no-underline"
+              href="#calendar"
+              >Oznámení</a
+            >
           </li>
-          <li class="mr-3 border-t md:border-0">
-            <a class="inline-block py-2 px-4 text-white no-underline" href="#contact">Kontakt</a>
+          <li class="mr-3">
+            <a
+              class="inline-block py-2 px-3 text-grey-darkest no-underline"
+              href="#messages"
+              >Kázání</a
+            >
+          </li>
+          <li>
+            <a
+              class="inline-block py-2 px-3 text-grey-darkest no-underline"
+              href="#contact"
+              >Kontakt</a
+            >
           </li>
         </ul>
       </div>
     </div>
-  </nav>
-</header>
 
-  <div class="container mx-auto flex flex-col md:flex-row items-center my-6 md:my-24">
-
-    <div class="flex flex-col w-full lg:w-1/2 justify-center items-start pt-12 pb-24 px-6">
-      <p class="uppercase tracking-loose">Rádi tě uvidíme mezi námi</p>
-      <h1 class="mt-4"> Církev bratrská</h1>
-      <h2 class="mb-4">Třinec Dolní Lištná</h2>
-      <p class="leading-normal mb-4">
-        Církev bratrská v Lištné je komunitou lidí, kteří chtějí svou víru žít nejen v neděli. Naším kompasem je Bible a centrem našeho života je Ježíš Kristus. Chceme se líbit Bohu, přebývat v Jeho přítomnosti, žít podle Jeho vůle a především žít podle Jeho největšího přikázání – milovat Boha a lidi kolem sebe.
-      </p>
-      <p class="leading-normal font-medium text-xl">
-        Scházme se každou neděli<br />
-        9:30–11:00<br />
-        Dolní Lištná 9
-      </p>
-    </div>
-
-    <div class="w-full lg:w-1/2 lg:py-6 text-center">
-      <img class="fill-current w-3/5 rounded-full" src="./img/hero.jpg" alt="CB Třinec Lištná" />
-    </div>
-
-  </div>
-
-  <div class="bg-white">
-    <div class="container mx-auto px-0 pt-16 sm:pt-0 md:px-12 lg:px-6">
-      <p id="calendar" class="font-bold text-grey-darkest text-4xl px-3 section-heading">
-        Oznámení <small id="today-date" class="text-muted"></small></p>
-
-      <section class="content-section-a">
-        <div class="container">
-              <div id="regularEvents"></div>
-              <div id="irregularEvents"></div>
-              <div id="otherEvents"></div>
-        </div>
-      </section>
-      
-      <section class="content-section-a">
-          <div class="container">
-            <hr class="section-heading-spacer">
-            <div class="clearfix"></div>
-            <p id="messages" class="font-bold text-grey-darkest text-4xl px-3 section-heading">
-                Kázání <small id="today-date" class="text-muted"></small></p>
-            <div id="messages-list"></div>
-          </div>
-        </section>
-
-    <div id="contact" class="container mx-auto md:pt-16">
-      <p class="font-bold text-grey-darkest text-4xl px-3 mb-6">
-        Kontakt</p>
-      <p class="px-3 pb-4">Sbor Církve bratrské Třinec, Dolní Lištná<br />
-         Dolní Lištná č.p. 9<br />
-         739 61 Třinec</p>
-
-      <p class="px-3 pb-4">IČO 265 20 354<br />
-         č.ú. 3207092399/0800 Česká spořitelna</p>
-
-      <p class="px-3 pb-12">Kazatel a správce sboru: Jakub Vrtaňa<br />
-         jakub.vrtana@cb.cz<br />
-         +420 776 019 926</p>
-    </div>
-
-  </div>
-</div>
-
-  <div class="container mx-auto py-5 px-6">
-    <div class="flex w-full pt-2 content-center justify-center">
-      <ul class="list-reset flex justify-between flex-1 md:flex-none items-center">
-        <li class="mr-3">
-          <a class="inline-block py-2 px-3 text-grey-darkest no-underline" href="#">Domů</a>
-        </li>
-        <li class="mr-3">
-          <a class="inline-block py-2 px-3 text-grey-darkest no-underline" href="#calendar">Oznámení</a>
-        </li>
-        <li class="mr-3">
-          <a class="inline-block py-2 px-3 text-grey-darkest no-underline" href="#messages">Kázání</a>
-        </li>
-        <li>
-          <a class="inline-block py-2 px-3 text-grey-darkest no-underline" href="#contact">Kontakt</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-
-  <template id="evtTemplate">
+    <template id="evtTemplate">
       <div class="calEvent">
         <div class="evtDateCol">
           <p class="flex flex-row items-center px-3 text-xl pb-2">
@@ -126,30 +192,43 @@
             <span class="w-6 text-right font-medium evtDate"></span>
             <span class="w-12 pl-3 font-medium evtMonth"></span>
             <span class="w-16 text-right font-thin evtTime"></span>
-            <span class="flex-grow w-24 text-justify pl-8 font-semibold evtTitle"></span>
+            <span
+              class="flex-grow w-24 text-justify pl-8 font-semibold evtTitle"
+            ></span>
+          </p>
           <div class="evtDescriptionCol">
-                <div class="evtTitleDetail">
-                  <span class="evtTitle"></span>
-                  <span class="evtDetail font-weight-normal text-muted"></span>
-                </div>
-                <div class="evtLinks font-weight-normal"></div>
+            <div class="evtTitleDetail">
+              <p class="flex flex-row flex-row items-center">
+                <span class="w-16"></span>
+                <span class="w-16 ml-1"></span>
+                <span
+                  class="evtDetail font-weight-normal text-muted w-32 ml-24"
+                ></span>
+              </p>
+            </div>
+            <div class="font-weight-normal">
+              <p class="flex flex-row flex-row items-center">
+                <span class="w-16"></span>
+                <span class="w-16 ml-1"></span>
+                <span class="evtLinks w-32 ml-24"></span>
+              </p>
+            </div>
           </div>
         </div>
-         </p>
       </div>
     </template>
 
     <template id="msgTemplate">
-        <div class="msgRow flex flex-col md:flex-row flex-wrap px-3 text-xl pb-2">
-          <div class="msgDate w-32 mr-2 font-weight-normal "></div>
-          <div class="msgTitle mr-2 font-semibold"></div>
-          <div class="msgAuthor font-weight-normal text-muted mr-3 font-light"></div>
-        </div>
-      </template>
+      <div class="msgRow flex flex-col md:flex-row flex-wrap px-3 text-xl pb-2">
+        <div class="msgDate w-32 mr-2 font-weight-normal "></div>
+        <div class="msgTitle mr-2 font-semibold"></div>
+        <div class="msgAuthor font-weight-normal text-muted mr-3 font-light"></div>
+      </div>
+    </template>
 
-  <script src="https://moment.github.io/luxon/global/luxon.min.js"></script>
-  
-  <script src="js/google-access.js"></script>
-  <script src="js/app.js"></script>
+    <script src="https://moment.github.io/luxon/global/luxon.min.js"></script>
+
+    <script src="js/google-access.js"></script>
+    <script src="js/app.js"></script>
   </body>
 </html>
