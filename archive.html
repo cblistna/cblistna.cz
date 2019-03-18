@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="cz" dir="ltr">
+  <head>
+    <title>CB Třinec Dolní Lištná</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css"
+    />
+  </head>
+  <body class="bg-yellow-dark font-sans leading-normal tracking-normal">
+    <header>
+      <nav class="bg-yellow-darkest p-2 mt-0 w-full">
+        <!-- Add this to make the nav fixed: "fixed z-10 pin-t" -->
+        <div class="container mx-auto flex flex-wrap items-center">
+          <div class="flex w-full md:w-1/2 justify-center md:justify-start text-white font-extrabold">
+            <a class="text-white no-underline" href="#">
+              <span class="text-2xl pl-2">CB Třinec Dolní Lištná</span>
+            </a>
+          </div>
+          <div class="flex w-full pt-2 content-center justify-between md:w-1/2 md:justify-end">
+            <ul class="md:flex list-reset text-center md:flex-none justify-between flex-1">
+              <li class="mr-3">
+                <a class="inline-block py-2 px-4 text-white no-underline" href="index.html">Domů</a>
+              </li>
+              <li class="mr-3 border-t md:border-0 dropdown text-white">
+                        <a href="#" class="text-white no-underline">
+                          <span class="inline-block py-2 px-4">Archív kázaní <i class="fa fa-caret-down"></i></span>  
+                        </a>
+                      <ul class="dropdown-content list-reset text-center hidden md:absolute ml-2 mt-2">
+                        <li class="border-b border-brown-dark pt-2 pb-2 md:w-32 bg-yellow-darkest" id='2017'> <a class="block text-white no-underline" href="#calendar">2017</a></li> 
+                        <li class="pt-2 pb-2 md:w-32 bg-yellow-darkest" id='2018'> <a class="block text-white no-underline" href="#calendar">2018</a></li>   
+                     </ul> 
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <div
+      class="container mx-auto flex flex-col md:flex-row items-center my-6 md:my-24"
+    >
+      <div
+        class="flex flex-col w-full lg:w-1/2 justify-center items-start pt-12 pb-24 px-6"
+      >
+        <p class="uppercase tracking-loose">Rádi tě uvidíme mezi námi</p>
+        <h1 class="mt-4">Církev bratrská</h1>
+        <h2 class="mb-4">Třinec Dolní Lištná</h2>
+        <p class="leading-normal mb-4">
+          Církev bratrská v Lištné je komunitou lidí, kteří chtějí svou víru žít
+          nejen v neděli. Naším kompasem je Bible a centrem našeho života je
+          Ježíš Kristus. Chceme se líbit Bohu, přebývat v Jeho přítomnosti, žít
+          podle Jeho vůle a především žít podle Jeho největšího přikázání –
+          milovat Boha a lidi kolem sebe.
+        </p>
+        <p class="leading-normal font-medium text-xl">
+          Scházme se každou neděli<br />
+          9:30–11:00<br />
+          Dolní Lištná 9
+        </p>
+      </div>
+
+      <div class="w-full lg:w-1/2 lg:py-6 text-center">
+        <img
+          class="fill-current w-3/5 rounded-full md:mr-32 "
+          src="./img/hero.jpg"
+          alt="CB Třinec Lištná"
+        />
+      </div>
+    </div>
+
+    <div class="bg-white">
+      <div class="container mx-auto px-0 pt-16 sm:pt-0 md:px-12 lg:px-6">
+        <p id="archive-title" class="font-bold text-grey-darkest text-4xl px-3 section-heading">Rok
+        </p>
+
+        <section class="content-section-a">
+          <div class="container">
+            <hr class="section-heading-spacer" />
+            <div class="clearfix"></div>
+            <p id="messages"class="font-bold text-grey-darkest text-4xl px-3 section-heading">
+              Kázání
+            </p>
+            <div id="messages-list"></div>
+              <p class="ml-3 font-bold text-lg"><a href="index.html#contact">Nedávná kazání</a></p>
+
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <div class="container mx-auto py-5 px-6">
+      <div class="flex w-full pt-2 content-center justify-center">
+        <div class="copyright">
+                <p>
+                    Copyright &copy; 
+                    2019 <strong></strong>. <span class="reserved-text">All rights reserved.</span>
+                </p>
+        </div>
+      </div>
+    </div>
+
+    <template id="msgTemplate">
+      <div class="msgRow flex flex-col md:flex-row flex-wrap px-3 text-xl pb-2">
+        <div class="msgDate w-32 mr-2 font-weight-normal "></div>
+        <div class="msgTitle mr-2 font-semibold"></div>
+        <div
+          class="msgAuthor font-weight-normal text-muted mr-3 font-light"
+        ></div>
+      </div>
+    </template>
+
+    <script src="https://moment.github.io/luxon/global/luxon.min.js"></script>
+
+    <script src="js/google-access.js"></script>
+    <script src="js/archive.js"></script>
+  </body>
+</html>
