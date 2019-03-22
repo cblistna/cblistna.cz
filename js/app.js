@@ -66,14 +66,6 @@ function linkOf(title, url) {
   return a;
 }
 
-function appendDate(now){
-  const dateHeader = document.getElementById('today-date');
-  if(dateHeader){
-    const dateText = document.createTextNode(` ${now.toLocaleDateString()}`);
-    dateHeader.append(dateText);
-  }
-}
-
 function eventDate(date) {
   return DateTime.fromISO(date.dateTime ? date.dateTime : date.date).setLocale('cs');
 }
@@ -153,7 +145,6 @@ ga.init().then(() => {
 
   ga.eventsOf('852scvjhsuhhl97lv3kb8r7be8@group.calendar.google.com', eventsBaseQuery).then(events => appendEvents(events, 'otherEvents'));
 
-  appendDate(new Date());
   // ga
   //   .eventsOf(
   //     'm1b2v3tb387ace2jjub70mq6vo@group.calendar.google.com',
