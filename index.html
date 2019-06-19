@@ -9,14 +9,11 @@
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
     />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css"
-    />
+  <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
   </head>
-  <body class="bg-yellow-dark font-sans leading-normal tracking-normal">
+  <body class="bg-yellow-500 font-sans leading-normal tracking-normal">
     <header>
-      <nav class="bg-yellow-darkest p-2 mt-0 w-full">
+      <nav class="bg-yellow-900 p-2 mt-0 w-full">
         <!-- Add this to make the nav fixed: "fixed z-10 pin-t" -->
         <div class="container mx-auto flex flex-wrap items-center">
           <div
@@ -98,7 +95,7 @@
       <div class="container mx-auto px-0 pt-16 sm:pt-0 md:px-12 lg:px-6">
         <p
           id="calendar"
-          class="font-bold text-grey-darkest text-4xl px-3 section-heading"
+          class="font-bold text-4xl px-3 section-heading"
         >
           Oznámení <small id="today-date" ></small>
         </p>
@@ -115,16 +112,16 @@
           <div class="container">
             <hr class="section-heading-spacer" />
             <div class="clearfix"></div>
-            <p id="messages" class="font-bold text-grey-darkest text-4xl px-3 section-heading">
+            <p id="messages" class="font-bold text-4xl px-3 section-heading">
               Kázání
             </p>
             <div id="messages-list"></div>
-            <p class="ml-3 font-bold text-lg"><a href="archive.html">Archív kazání</a></p>
+            <p class="ml-3 font-bold text-lg"><a href="archive.html" class="text-blue-600">Archív kazání</a></p>
           </div>
         </section>
 
         <div id="contact" class="container mx-auto md:pt-16">
-          <p class="font-bold text-grey-darkest text-4xl px-3 mb-6">
+          <p class="font-bold text-4xl px-3 mb-6">
             Kontakt
           </p>
           <p class="px-3 pb-4">
@@ -154,28 +151,28 @@
         >
           <li class="mr-3">
             <a
-              class="inline-block py-2 px-3 text-grey-darkest no-underline"
+              class="inline-block py-2 px-3 no-underline"
               href="#"
               >Domů</a
             >
           </li>
           <li class="mr-3">
             <a
-              class="inline-block py-2 px-3 text-grey-darkest no-underline"
+              class="inline-block py-2 px-3 no-underline"
               href="#calendar"
               >Oznámení</a
             >
           </li>
           <li class="mr-3">
             <a
-              class="inline-block py-2 px-3 text-grey-darkest no-underline"
+              class="inline-block py-2 px-3 no-underline"
               href="#messages"
               >Kázání</a
             >
           </li>
           <li>
             <a
-              class="inline-block py-2 px-3 text-grey-darkest no-underline"
+              class="inline-block py-2 px-3 no-underline"
               href="#contact"
               >Kontakt</a
             >
@@ -192,25 +189,23 @@
             <span class="w-6 text-right font-medium evtDate"></span>
             <span class="w-12 pl-3 font-medium evtMonth"></span>
             <span class="w-16 text-right font-thin evtTime"></span>
-            <span
-              class="flex-grow w-24 text-justify pl-8 font-semibold evtTitle"
-            ></span>
+            <span class="flex-grow w-24 text-justify pl-8 font-semibold evtTitle"></span>
           </p>
-          <div class="evtDescriptionCol">
+          <div class="evtDescriptionCol text-blue-600">
             <div class="evtTitleDetail">
               <p class="flex flex-row flex-row items-center">
-                <span class="w-16"></span>
                 <span class="w-16 ml-1"></span>
+                <span class="w-16 ml-8"></span>
                 <span
-                  class="evtDetail font-weight-normal text-muted w-32 ml-24"
+                  class="evtDetail font-weight-normal text-muted w-16 ml-16"
                 ></span>
               </p>
             </div>
             <div class="font-weight-normal">
-              <p class="flex flex-row flex-row items-center">
-                <span class="w-16"></span>
+              <p>
                 <span class="w-16 ml-1"></span>
-                <span class="evtLinks w-32 ml-24"></span>
+                <span class="w-16 ml-8"></span>
+                <span class="evtLinks w-16 ml-48"></span>
               </p>
             </div>
           </div>

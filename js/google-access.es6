@@ -29,7 +29,7 @@ class GoogleAccess {
       });
   }
 
-  files(query) {
+ files(query) {
     return new Promise((resolve, reject) => {
       this._resolveAccessToken()
         .then(() => {
