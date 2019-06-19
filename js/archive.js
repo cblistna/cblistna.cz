@@ -10,14 +10,15 @@ function dateOf(date) {
 
 function appendMessages(elementId) {
   const outlet = document.getElementById(elementId);
+  
   while (outlet.hasChildNodes()) {
     outlet.removeChild(outlet.lastChild);
   }
   const msgTemplate = document.getElementById('msgTemplate');
   const msgMonthlyTemplate = document.getElementById('msgMonthly');
-  const sortedMonthyMessages = new Map([...messagesMonthly.entries()].sort().reverse());
-
-    for(let [key,value] of sortedMonthyMessages){
+  let sortedMonthyMessages = new Map([...messagesMonthly.entries()].sort().reverse());
+  
+  for(let [key,value] of sortedMonthyMessages){
      let msgMonthNode = document.importNode(msgMonthlyTemplate.content,true);
      const msgList = msgMonthNode.querySelector('.msgList');
      let formatedMonth = new Date(key).toLocaleString('cs', {month: 'long'});
@@ -38,6 +39,12 @@ function appendMessages(elementId) {
      });
       outlet.appendChild(msgMonthNode);
     }
+    cleanMap();
+}
+
+function cleanMap() {
+  sortedMonthyMessages = new Map();
+  messagesMonthly = new Map();
 }
 
 function parseFile(file) {
@@ -61,8 +68,8 @@ function parseFile(file) {
 
 const ga = new GoogleAccess('cblistna', '122939969451-nm6pc9104kg6m7avh3pq8sn735ha9jja.apps.googleusercontent.com', 'iFas6FSxexJ0ztqx6QfUH8kK', '1/4tbmdLZ3tItmdMx1zIoc9ZdlBZ8E854-t1whajGynYw');
 function fetchArchiveMessages(ga,messagesYear = 2019) {
-ga.init().then(() => {
-  let  messagesQuery = {
+  ga.init().then(() => {
+    let  messagesQuery = {
       orderBy: 'name asc',
       pageSize: 60,
       q: `mimeType='audio/mp3' and name contains '${messagesYear}' and trashed=false`,
@@ -95,6 +102,7 @@ function assortMessagesByMonth(messages) {
     }
     return parsedMessage;
   });
+
   for(let sortedMonth of months){
     let sortedMessages = parsedMessages.filter(message => message.date.toFormat('MM')=== sortedMonth);
     messagesMonthly.set(sortedMonth , sortedMessages);
@@ -119,12 +127,15 @@ function assortMessagesByMonth(messages) {
 (function (){
   const archiveMenu = document.querySelector('.dropdown-content');
   for(let menuItem of archiveMenu.children){
+    if(menuItem.id != ""){
     menuItem.addEventListener('click',()=>{
       const itemID = menuItem.id;
-      fetchArchiveMessages(ga,itemID);
-      appendYearTitle(itemID);
+      
+        fetchArchiveMessages(ga,itemID);
+        appendYearTitle(itemID);
     });
   }
+}
 })();
 
 
