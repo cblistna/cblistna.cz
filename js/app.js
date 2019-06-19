@@ -80,7 +80,6 @@ function timeOrBlankOf(date) {
 }
 
 function regularEventsLongerThanWeek(date){
-  console.log(date);
   const now = new Date();
   if(Date.parse(date) > new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000)){
     return true;
@@ -92,7 +91,6 @@ function appendMessages(files, elementId) {
   const outlet = document.getElementById(elementId);
   const template = document.getElementById('msgTemplate');
   files.forEach(file => {
-    console.log(file);
     const meta = parseFile(file);
     const node = document.importNode(template.content, true);
     node.querySelector('.msgDate').textContent = dateOf(meta.date);
