@@ -9,16 +9,13 @@
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
     />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css"
-    />
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
 
   </head>
 
   <body class="font-sans leading-normal tracking-normal min-h-screen flex flex-col">
     <header>
-      <nav class="bg-yellow-darkest p-2 mt-0 w-full">
+      <nav class="bg-yellow-900 p-2 mt-0 w-full">
         <!-- Add this to make the nav fixed: "fixed z-10 pin-t" -->
         <div class="container mx-auto flex flex-wrap items-center">
           <div
@@ -51,14 +48,14 @@
                   class="dropdown-content list-reset text-center hidden md:absolute ml-2 mt-2"
                 >
                   <li
-                    class="border-b border-brown-dark pt-2 pb-2 md:w-32 bg-yellow-darkest"
+                    class="border-b border-brown-dark pt-2 pb-2 md:w-32 bg-yellow-900"
                     id="2017"
                   >
                     <a class="block text-white no-underline" href="#calendar"
                       >2017</a
                     >
                   </li>
-                  <li class="pt-2 pb-2 md:w-32 bg-yellow-darkest" id="2018">
+                  <li class="pt-2 pb-2 md:w-32 bg-yellow-900" id="2018">
                     <a class="block text-white no-underline" href="#calendar"
                       >2018</a
                     >
@@ -90,29 +87,34 @@
             >
               Kázání
             </p>
-            <div id="messages-list"></div>
-            <p class="ml-3 font-bold text-lg">
-              <a href="index.html#contact">Nedávná kazání</a>
-            </p>
+            <div id="msgContainer">
+           
+            </div>
+            
           </div>
         </section>
       </div>
     </div>
 
-    <div class="mx-auto p-4 w-full flex-no-shrink bg-yellow-dark text-center">
+    <div class="mx-auto p-4 w-full flex-no-shrink bg-yellow-500 text-center">
       <span> Copyright&copy; 2019. All rights reserved.</span>
     </div>
 
     <template id="msgTemplate">
       <div class="msgRow flex flex-col md:flex-row flex-wrap px-3 text-xl pb-2">
         <div class="msgDate w-32 mr-2 font-weight-normal "></div>
-        <div class="msgTitle mr-2 font-semibold"></div>
+        <div class="msgTitle mr-2 font-semibold text-blue-600"></div>
         <div
           class="msgAuthor font-weight-normal text-muted mr-3 font-light"
         ></div>
       </div>
     </template>
-
+   
+    <template id="msgMonthly">
+      <h3 class="msgMonthTitle"></h3>
+      <div class="msgList"></div>
+    </template>
+    
     <script src="https://moment.github.io/luxon/global/luxon.min.js"></script>
 
     <script src="js/google-access.js"></script>

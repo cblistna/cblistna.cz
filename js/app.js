@@ -4,6 +4,7 @@ const DateTime = luxon.DateTime;
 const today = DateTime.local().setLocale('cs');
 
 function appendEvents(events, elementId) {
+
   if (events.items.length > 0) {
     const outlet = document.getElementById(elementId);
     const header = document.createElement('span');
@@ -12,20 +13,16 @@ function appendEvents(events, elementId) {
     header.classList.add('font-bold', 'text-grey', 'text-2xl', 'px-3', 'mt-8', 'mb-8');
     outlet.appendChild(header);
     const template = document.getElementById('evtTemplate');
-    const eventHide = /\[.*\]/;
+    const eventHide = /( ?\[.*\]|!$)/g;
     events.items.forEach(event => {
       const node = document.importNode(template.content, true);
       const title = event.summary.replace(eventHide, '');
       const start = eventDate(event.start);
       const date = dateOf(start).split(' ');
-      if(elementId !== 'regularEvents'){
-        node.querySelector('.evtDate').textContent = date[0];
-        node.querySelector('.evtMonth').textContent = date[1];
-      }
-      else {
-        node.querySelector('.evtDate').classList.remove('w-6');
-        node.querySelector('.evtMonth').classList.remove('w-12', 'pl-3');
-      }
+      
+
+      node.querySelector('.evtDate').textContent = date[0];
+      node.querySelector('.evtMonth').textContent = date[1];
       node.querySelector('.evtTime').textContent = timeOrBlankOf(start);
       node.querySelector('.evtWeekDay').textContent = weekDayOf(start);
       node.querySelector('.evtTitle').textContent = title;
@@ -82,10 +79,20 @@ function timeOrBlankOf(date) {
   return date.hour === 0 && date.minute === 0 ? '' : date.toFormat('HH:mm');
 }
 
+function regularEventsLongerThanWeek(date){
+  console.log(date);
+  const now = new Date();
+  if(Date.parse(date) > new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000)){
+    return true;
+  }
+  return false;
+}
+
 function appendMessages(files, elementId) {
   const outlet = document.getElementById(elementId);
   const template = document.getElementById('msgTemplate');
   files.forEach(file => {
+    console.log(file);
     const meta = parseFile(file);
     const node = document.importNode(template.content, true);
     node.querySelector('.msgDate').textContent = dateOf(meta.date);
@@ -130,16 +137,18 @@ ga.init().then(() => {
     timeMin: now.toISOString(),
     singleEvents: true,
     orderBy: 'startTime',
-    maxResults: 10
+    maxResults: 100
   };
 
   const regularEventsQuery = Object.assign({
-    timeMax: new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000).toISOString()
+    timeMax: new Date(now.getTime() + 60 * 24 * 60 * 60 * 1000).toISOString()
   }, eventsBaseQuery);
 
   ga.eventsOf('cblistna@gmail.com', regularEventsQuery).then(events => {
+    const nowPlus7Days = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
+    events.items = events.items.filter(event => (eventDate(event.start) < nowPlus7Days) || event.summary.endsWith('!'));
     appendEvents(events, 'regularEvents');
-  });
+    });
 
   ga.eventsOf('seps8o249ihvkvdhgael78ofg0@group.calendar.google.com', eventsBaseQuery).then(events => appendEvents(events, 'irregularEvents'));
 

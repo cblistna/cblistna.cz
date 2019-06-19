@@ -2,23 +2,22 @@
 <html lang="en">
 
   <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="description" content="">
     <meta name="author" content="">
     
-    <title>Landing Page - Start Bootstrap Theme</title>
+    <title>Oznámení</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css">
-
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
   </head>
-  <body class="sans-serif">
+
+  <body class="sans-serif bg-gray-100">
   
-  <div class="bg-grey-lighter">
+  <div>
       <div class="container mx-auto px- sm:pt-0 md:px-12 lg:px-6">
-        <p id="calendar" class="font-bold text-grey-darkest text-4xl px-3 pt-8 section-heading">
+        <p id="calendar" class="font-bold text-gray-800 text-4xl px-3 pt-8 section-heading">
           Oznámení <small id="today-date" class="text-muted"></small></p>
   
         <section class="content-section-a">
@@ -41,12 +40,24 @@
           <span class="w-12 pl-3 font-medium evtMonth"></span>
           <span class="w-16 text-right font-thin evtTime"></span>
           <span class="flex-grow w-24 text-justify pl-8 font-semibold evtTitle"></span>
-        <div class="evtDescriptionCol">
-              <div class="evtTitleDetail">
-                <span class="evtTitle"></span>
-                <span class="evtDetail font-weight-normal text-muted"></span>
-              </div>
-              <div class="evtLinks font-weight-normal"></div>
+       
+          <div class="evtDescriptionCol text-blue-600">
+               <div class="evtTitleDetail">
+              <p class="flex flex-row flex-row items-center">
+                <span class="w-24 ml-2"></span>
+                <span class="w-24 ml-5"></span>
+                <span
+                  class="evtDetail font-weight-normal text-muted w-48 ml-20"
+                ></span>
+              </p>
+            </div>
+            <div class="font-weight-normal">
+              <p>
+                <span class="w-24 ml-3"></span>
+                <span class="w-24 ml-40"></span>
+                <span class="evtLinks w-40 ml-32"></span>
+              </p>
+            </div>
         </div>
       </div>
        </p>
