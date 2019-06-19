@@ -10,20 +10,23 @@ function dateOf(date) {
 
 function appendMessages(elementId) {
   const outlet = document.getElementById(elementId);
+  while (outlet.hasChildNodes()) {
+    outlet.removeChild(outlet.lastChild);
+  }
   const msgTemplate = document.getElementById('msgTemplate');
   const msgMonthlyTemplate = document.getElementById('msgMonthly');
-  const msgNode = document.importNode(msgTemplate.content, true);
-  const msgMonthNode = document.importNode(msgMonthlyTemplate.content,true);
-  // while (outlet.hasChildNodes()) {
-  //   outlet.removeChild(outlet.lastChild);
-  // }
-    for(let [key,value] of messagesMonthly){
-      msgMonthNode.querySelector('.msgMonthTitle').textContent = key;
-      msgMonthNode.querySelector('.msgList').textContent = value.map(message =>{
-        // console.log(message);
+  const sortedMonthyMessages = new Map([...messagesMonthly.entries()].sort().reverse());
+
+    for(let [key,value] of sortedMonthyMessages){
+     let msgMonthNode = document.importNode(msgMonthlyTemplate.content,true);
+     const msgList = msgMonthNode.querySelector('.msgList');
+     let formatedMonth = new Date(key).toLocaleString('cs', {month: 'long'});
+     msgMonthNode.querySelector('.msgMonthTitle').textContent = formatedMonth.charAt(0).toUpperCase() + formatedMonth.slice(1);
+     value.map(message =>{
+        let msgNode = document.importNode(msgTemplate.content, true);
         msgNode.querySelector('.msgDate').textContent = dateOf(message.date);
         msgNode.querySelector('.msgAuthor').textContent = message.author;
-     
+
          const link = document.createElement('a');
          link.appendChild(document.createTextNode(message.title));
          link.title = message.title;
@@ -31,9 +34,10 @@ function appendMessages(elementId) {
          link.target = '_blank';
          link.classList.add('no-underline');
          msgNode.querySelector('.msgTitle').appendChild(link);
-         outlet.appendChild(msgNode); 
-      });   
-   }
+         msgList.appendChild(msgNode);
+     });
+      outlet.appendChild(msgMonthNode);
+    }
 }
 
 function parseFile(file) {
@@ -60,7 +64,7 @@ function fetchArchiveMessages(ga,messagesYear = 2019) {
 ga.init().then(() => {
   let  messagesQuery = {
       orderBy: 'name asc',
-      pageSize: 100,
+      pageSize: 60,
       q: `mimeType='audio/mp3' and name contains '${messagesYear}' and trashed=false`,
       fields: 'files(id, name, webViewLink, webContentLink)'
     };
@@ -84,15 +88,15 @@ function assortMessagesByMonth(messages) {
   let months = [];
   let parsedMessages = unsortedMessages.map(message => {
     let parsedMessage = parseFile(message);
-    let month = parsedMessage.date.setLocale('en').toFormat('LLL');
+  
+    let month = parsedMessage.date.toFormat('MM');
     if(!months.includes(month)){
       months.push(month);
     }
     return parsedMessage;
   });
- 
   for(let sortedMonth of months){
-    let sortedMessages = parsedMessages.filter(message => message.date.setLocale('en').toFormat('LLL') === sortedMonth);
+    let sortedMessages = parsedMessages.filter(message => message.date.toFormat('MM')=== sortedMonth);
     messagesMonthly.set(sortedMonth , sortedMessages);
   }
 }
