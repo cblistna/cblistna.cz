@@ -8,9 +8,44 @@ function dateOf(date) {
   return today.year === date.year ? date.toFormat('d. LLL') : date.toFormat('d. LLL yyyy');
 }
 
-function appendMessages(elementId) {
-  const outlet = document.getElementById(elementId);
+function createYearTabs(years){
+  const dropdown = document.querySelector('.dropdown-content');
+
+  for (let year of years) {
+
+      const listItem = document.createElement('li');
+      listItem.classList.add("border-b", "border-brown-dark", "pt-2" ,"pb-2" ,"md:w-32", "bg-yellow-900");
+      listItem.setAttribute('id',year);
+      
+      listItem.addEventListener('click',()=>{
+        fetchArchiveMessages(ga,year);
+        appendYearTitle(year);
+      });
+
+      const link = document.createElement('a');
+      link.classList.add("block", "text-white", "no-underline");
+      link.innerText = year;
+      listItem.appendChild(link);
+      dropdown.appendChild(listItem);
+  }
+}
+
+function createMessageLink(message) {
+
+    const link = document.createElement('a');
+    link.appendChild(document.createTextNode(message.title));
+    link.title = message.title;
+    link.href = message.link.substring(0, message.link.indexOf('&export='));
+    link.target = '_blank';
+    link.classList.add('no-underline');
   
+    return link;
+}
+
+
+function appendMessages(elementId) {
+
+  const outlet = document.getElementById(elementId);
   while (outlet.hasChildNodes()) {
     outlet.removeChild(outlet.lastChild);
   }
@@ -19,24 +54,22 @@ function appendMessages(elementId) {
   let sortedMonthyMessages = new Map([...messagesMonthly.entries()].sort().reverse());
   
   for(let [key,value] of sortedMonthyMessages){
+
      let msgMonthNode = document.importNode(msgMonthlyTemplate.content,true);
      const msgList = msgMonthNode.querySelector('.msgList');
      let formatedMonth = new Date(key).toLocaleString('cs', {month: 'long'});
      msgMonthNode.querySelector('.msgMonthTitle').textContent = formatedMonth.charAt(0).toUpperCase() + formatedMonth.slice(1);
+     
      value.map(message =>{
-        let msgNode = document.importNode(msgTemplate.content, true);
-        msgNode.querySelector('.msgDate').textContent = dateOf(message.date);
-        msgNode.querySelector('.msgAuthor').textContent = message.author;
-
-         const link = document.createElement('a');
-         link.appendChild(document.createTextNode(message.title));
-         link.title = message.title;
-         link.href = message.link.substring(0, message.link.indexOf('&export='));
-         link.target = '_blank';
-         link.classList.add('no-underline');
+         let msgNode = document.importNode(msgTemplate.content, true);
+         msgNode.querySelector('.msgDate').textContent = dateOf(message.date);
+         msgNode.querySelector('.msgAuthor').textContent = message.author;
+         
+         const link = createMessageLink(message);
          msgNode.querySelector('.msgTitle').appendChild(link);
          msgList.appendChild(msgNode);
      });
+
       outlet.appendChild(msgMonthNode);
     }
     cleanMap();
@@ -67,6 +100,7 @@ function parseFile(file) {
 }
 
 const ga = new GoogleAccess('cblistna', '122939969451-nm6pc9104kg6m7avh3pq8sn735ha9jja.apps.googleusercontent.com', 'iFas6FSxexJ0ztqx6QfUH8kK', '1/4tbmdLZ3tItmdMx1zIoc9ZdlBZ8E854-t1whajGynYw');
+
 function fetchArchiveMessages(ga,messagesYear = 2019) {
   ga.init().then(() => {
     let  messagesQuery = {
@@ -123,19 +157,23 @@ function assortMessagesByMonth(messages) {
     });
 })();
 
+function getMessagesYears() {
+  const initalYear = 2006;
+  const currentYear = today.year;
+  let yearsCount = 0;
+  
+  let messageYears =  [...new Array(currentYear-initalYear)].map(()=> {
+    yearsCount++;
+    let year = initalYear + yearsCount;
+    return year;
+  });
+  return messageYears;
+}
 
 (function (){
-  const archiveMenu = document.querySelector('.dropdown-content');
-  for(let menuItem of archiveMenu.children){
-    if(menuItem.id != ""){
-    menuItem.addEventListener('click',()=>{
-      const itemID = menuItem.id;
-      
-        fetchArchiveMessages(ga,itemID);
-        appendYearTitle(itemID);
-    });
-  }
-}
+  const messagesYears = getMessagesYears();
+  createYearTabs(messagesYears.reverse());
+  
 })();
 
 
