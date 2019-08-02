@@ -16,7 +16,7 @@ function createYearTabs(years){
       const listItem = document.createElement('li');
       listItem.classList.add("border-b", "border-brown-dark", "pt-2" ,"pb-2" ,"md:w-32", "bg-yellow-900");
       listItem.setAttribute('id',year);
-      
+
       listItem.addEventListener('click',()=>{
         fetchArchiveMessages(ga,year);
         appendYearTitle(year);
@@ -38,7 +38,7 @@ function createMessageLink(message) {
     link.href = message.link.substring(0, message.link.indexOf('&export='));
     link.target = '_blank';
     link.classList.add('no-underline');
-  
+
     return link;
 }
 
@@ -52,19 +52,19 @@ function appendMessages(elementId) {
   const msgTemplate = document.getElementById('msgTemplate');
   const msgMonthlyTemplate = document.getElementById('msgMonthly');
   let sortedMonthyMessages = new Map([...messagesMonthly.entries()].sort().reverse());
-  
+
   for(let [key,value] of sortedMonthyMessages){
 
      let msgMonthNode = document.importNode(msgMonthlyTemplate.content,true);
      const msgList = msgMonthNode.querySelector('.msgList');
      let formatedMonth = new Date(key).toLocaleString('cs', {month: 'long'});
      msgMonthNode.querySelector('.msgMonthTitle').textContent = formatedMonth.charAt(0).toUpperCase() + formatedMonth.slice(1);
-     
+
      value.map(message =>{
          let msgNode = document.importNode(msgTemplate.content, true);
          msgNode.querySelector('.msgDate').textContent = dateOf(message.date);
          msgNode.querySelector('.msgAuthor').textContent = message.author;
-         
+
          const link = createMessageLink(message);
          msgNode.querySelector('.msgTitle').appendChild(link);
          msgList.appendChild(msgNode);
@@ -105,7 +105,7 @@ function fetchArchiveMessages(ga,messagesYear = 2019) {
   ga.init().then(() => {
     let  messagesQuery = {
       orderBy: 'name asc',
-      pageSize: 60,
+      pageSize: 100,
       q: `mimeType='audio/mp3' and name contains '${messagesYear}' and trashed=false`,
       fields: 'files(id, name, webViewLink, webContentLink)'
     };
@@ -115,7 +115,7 @@ function fetchArchiveMessages(ga,messagesYear = 2019) {
   .then(()=>{
     appendMessages('msgContainer');
   });
-  
+
 }).catch(console.error)};
 
 
@@ -129,7 +129,7 @@ function assortMessagesByMonth(messages) {
   let months = [];
   let parsedMessages = unsortedMessages.map(message => {
     let parsedMessage = parseFile(message);
-  
+
     let month = parsedMessage.date.toFormat('MM');
     if(!months.includes(month)){
       months.push(month);
@@ -161,7 +161,7 @@ function getMessagesYears() {
   const initalYear = 2006;
   const currentYear = today.year;
   let yearsCount = 0;
-  
+
   let messageYears =  [...new Array(currentYear-initalYear)].map(()=> {
     yearsCount++;
     let year = initalYear + yearsCount;
@@ -173,7 +173,7 @@ function getMessagesYears() {
 (function (){
   const messagesYears = getMessagesYears();
   createYearTabs(messagesYears.reverse());
-  
+
 })();
 
 
