@@ -101,7 +101,7 @@ function parseFile(file) {
 
 const ga = new GoogleAccess('cblistna', '122939969451-nm6pc9104kg6m7avh3pq8sn735ha9jja.apps.googleusercontent.com', 'iFas6FSxexJ0ztqx6QfUH8kK', '1/4tbmdLZ3tItmdMx1zIoc9ZdlBZ8E854-t1whajGynYw');
 
-function fetchArchiveMessages(ga,messagesYear = 2019) {
+function fetchArchiveMessages(ga,messagesYear = new Date().getFullYear()) {
   ga.init().then(() => {
     let  messagesQuery = {
       orderBy: 'name asc',
